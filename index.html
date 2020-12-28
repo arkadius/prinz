@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+        @import url(https://fonts.googleapis.com/css2?family=Sofia);
+        @import url(https://fonts.googleapis.com/css2?family=Quicksand:400,700);
+
+        body {
+            font-family: 'Quicksand';
+        }
+        h1, h2, h3 {
+            font-family: 'Quicksand';
+            font-weight: normal;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .remark-code, .remark-inline-code {
+            font-family: 'Ubuntu Mono';
+        }
+        .right-half {
+            width: 50%;
+            float: right;
+        }
+        .left-half {
+            width: 50%;
+            float: left;
+        }
+        .m-25 {
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+        .centered-flex {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<textarea id="source">
+
+class: center, middle
+
+# Serving Machine Learning Models Approaches
+
+---
+
+# Agenda
+
+.left-half[
+
+- PMML
+
+    1.1 Introduction to PMML
+
+    1.2 Structure of a PMML file
+
+    1.3 Examples
+
+    1.4 Pros and cons
+]
+
+--
+
+.left-half[
+
+- Mlflow
+
+    2.1 Introduction to Mlflow
+
+    2.2 Infrastructure of Mlfow
+
+    2.3 Examples
+
+    2.4 Pros and cons
+]
+
+--
+
+.left-half[
+
+- H20
+
+    3.1 Introduction to H20
+
+    3.2 Infrastructure of H20
+
+    3.3 Examples
+
+    3.4 Pros and cons
+]
+
+---
+
+# Introduction to PMML
+
+PMML is an XML-based standard language used to represent models.
+PMML allows you to easily share models between different applications.
+You can train a model in one system, express it in PMML, and easily move it to another system.
+
+PMML incorporates data pre- and post-processing as well as the model itself.
+
+.centered-flex[![PMML schema](https://www.ibm.com/developerworks/library/ba-ind-PMML1/image001.gif)]
+
+---
+
+# Introduction to PMML
+
+PMML defines specific elements for several predictive techniques, for example neural networks,
+decision trees, and clustering models. PMML also defines an element for representing multiple
+models and therefore can be used to represent model composition or ensemble.
+PMML is supported by numerous products, including Apache Spark and SAS or IBM statistical tools.
+
+.centered-flex[
+
+![Apache Spark](https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg)
+
+![sas](https://upload.wikimedia.org/wikipedia/commons/1/10/SAS_logo_horiz.svg)
+
+![IBM](https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg)
+
+]
+
+---
+
+# Structure of a PMML file
+
+1. Data Dictionary - identifies and defines input data fields
+
+2. Mining Schema - defines the strategies for handling missing and outlier values
+
+3. Data Transformations - define the computations required for pre-processing the raw input data into derived fields
+
+4. Model Definition - defines the structure and the parameters used to build the model
+
+5. Outputs - define the expected model outputs
+
+6. Targets - define the post-processing steps to be applied to the model output
+
+7. Model Explanation - defines the performance metrics obtained when passing test data through the model (as opposed to training data).
+
+8. Model Verification - defines a sample set of input data records together with expected model outputs
+
+
+---
+
+# Examples
+
+## The DataDictionary element
+
+```xml
+<DataDictionary numberOfFields="3">
+    <DataField dataType="double" name="Value" optype="continuous">
+        <Interval closure="openClosed" rightMargin="60" />
+    </DataField>
+    <DataField dataType="string" name="Element" optype="categorical">
+        <Value property="valid" value="Magnesium" />
+        <Value property="valid" value="Sodium" />
+        <Value property="valid" value="Calcium" />
+        <Value property="valid" value="Radium" />
+    </DataField>
+    <DataField dataType="double" name="Risk" optype="continuous" />
+</DataDictionary>
+```
+
+---
+
+# Examples
+
+## A neural layer and its neurons
+
+```xml
+<NeuralLayer numberOfNeurons="2">
+    <Neuron id="3" bias="-3.1808306946637">
+        <Con from="0" weight="0.119477686963504" />
+        <Con from="1" weight="-1.97301278112877" />
+        <Con from="2" weight="3.04381251760906" />
+    </Neuron>
+    <Neuron id="4" bias="0.743161353729323">
+        <Con from="0" weight="-0.49411146396721" />
+        <Con from="1" weight="2.18588757615864" />
+        <Con from="2" weight="-2.01213331163562" />
+    </Neuron>
+</NeuralLayer>
+```
+
+---
+
+# Pros and cons
+
+--
+
+.left-half[
+
+Pros:
+
+- Portability and standardization
+
+- Decent coverage of standard model types from popular libraries
+
+- Model files themselves are semi-readable
+
+]
+
+--
+
+.right-half[
+
+Cons:
+
+- No support for some modern libraries e.g. PyTorch
+
+- Model files are huge
+
+]
+
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script>
+      var slideshow = remark.create();
+    </script>
+</body>
+</html>
