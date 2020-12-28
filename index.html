@@ -10,10 +10,12 @@
 
         body {
             font-family: 'Quicksand';
+            color: #0013a0;
         }
-        h1, h2, h3 {
+        h1, h2, h3, h4, h5 {
             font-family: 'Quicksand';
-            font-weight: normal;
+            font-weight: bold;
+            color: #0013a0;
         }
         img {
             max-width: 100%;
@@ -30,9 +32,10 @@
             width: 50%;
             float: left;
         }
-        .m-25 {
-            margin-left: 25%;
-            margin-right: 25%;
+        .left-2-5 {
+            margin-left: 10%;
+            width: 40%;
+            float: left;
         }
         .centered-flex {
             display: flex;
@@ -48,11 +51,12 @@
 
 class: center, middle
 
+<img src="img/prinz.svg" style="height: 20em">
 # Serving Machine Learning Models Approaches
 
 ---
 
-# Agenda
+## Agenda
 
 .left-half[
 
@@ -99,7 +103,7 @@ class: center, middle
 
 ---
 
-# Introduction to PMML
+## Introduction to PMML
 
 PMML is an XML-based standard language used to represent models.
 PMML allows you to easily share models between different applications.
@@ -111,26 +115,30 @@ PMML incorporates data pre- and post-processing as well as the model itself.
 
 ---
 
-# Introduction to PMML
+## Introduction to PMML
+
+.left-half[
 
 PMML defines specific elements for several predictive techniques, for example neural networks,
 decision trees, and clustering models. PMML also defines an element for representing multiple
 models and therefore can be used to represent model composition or ensemble.
 PMML is supported by numerous products, including Apache Spark and SAS or IBM statistical tools.
 
-.centered-flex[
+]
 
-![Apache Spark](https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg)
+.left-2-5[
 
-![sas](https://upload.wikimedia.org/wikipedia/commons/1/10/SAS_logo_horiz.svg)
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg">
 
-![IBM](https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg)
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/10/SAS_logo_horiz.svg">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg">
 
 ]
 
 ---
 
-# Structure of a PMML file
+## Structure of a PMML file
 
 1. Data Dictionary - identifies and defines input data fields
 
@@ -151,9 +159,9 @@ PMML is supported by numerous products, including Apache Spark and SAS or IBM st
 
 ---
 
-# Examples
+## Examples
 
-## The DataDictionary element
+### The DataDictionary element
 
 ```xml
 <DataDictionary numberOfFields="3">
@@ -172,9 +180,9 @@ PMML is supported by numerous products, including Apache Spark and SAS or IBM st
 
 ---
 
-# Examples
+## Examples
 
-## A neural layer and its neurons
+### A neural layer and its neurons
 
 ```xml
 <NeuralLayer numberOfNeurons="2">
@@ -193,9 +201,7 @@ PMML is supported by numerous products, including Apache Spark and SAS or IBM st
 
 ---
 
-# Pros and cons
-
---
+## Pros and cons
 
 .left-half[
 
