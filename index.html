@@ -43,6 +43,52 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Content-specific styles */
+
+        .mlflow ul, .mlflow code {
+            font-size: 32px;
+        }
+
+        .mlflow code {
+            font-size: 26px;
+        }
+
+        #mlflow-logo {
+            display: block;
+            margin: 2em auto 3em;
+            height: 8em;
+        }
+
+        .mlflow-components ul {
+            list-style: none;
+            display: grid;
+            padding-left: 0;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1em;
+        }
+
+        .mlflow-components li {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 1em 0.5em;
+            border: 0.125em solid #0013a0;
+            border-radius: 0.375em;
+            text-align: center;
+        }
+
+        .mlflow-components li > * {
+            margin: 0 auto 0.25em;
+        }
+
+        .mlflow-example-project .left-half {
+            width: 25%;
+        }
+
+        .mlflow-example-project .right-half {
+            width: 75%;
+        }
+
     </style>
 </head>
 <body>
@@ -225,6 +271,134 @@ Cons:
 - Model files are huge
 
 ]
+
+---
+class: mlflow
+
+## MLflow
+
+<img  id="mlflow-logo" src="img/mlflow-logo.svg" alt="MLflow logo" title="MLflow logo" />
+
+- A platform for managing complete ML lifecycle
+- Open source project with an open interface for integrations
+- A set of modular components: pick and choose to match your needs
+
+---
+class: mlflow, mlflow-components
+
+## MLflow components
+
+- ### Tracking
+  Save parameters and metrics of runs
+- ### Projects
+  Capture data science code for sharing
+- ### Models
+  Deploy models in varying enviroments
+- ### Registry
+  Store and annotate models
+
+---
+class: mlflow
+
+## Tracking
+
+- API for logging: version, parameters, metrics and _artefacts_ (output files)
+- UI for visualizing data and comparing metrics
+- Multiple types of metadata storage: files, databases, an HTTP server
+- Multiple types of artifact storage: Amazon S3, Azure Blob, GCP
+- Easy to instrument any existing code
+
+---
+class: mlflow
+
+## Tracking: saving data
+
+```python
+import mlflow
+
+with mlflow.start_run():
+    mlflow.log_param("alpha", alpha)
+    
+    # train model
+
+    mlflow.log_metric("mse", model.mse())
+    mlflow.log_artifact("plot", model.plot(test_df))
+    mlflow.tensorflow.log_model(model)
+```
+
+---
+class: mlflow
+
+## Tracking: UI
+
+![](img/mlflow-run-list.png)
+
+---
+class: mlflow
+
+## Projects
+
+- Packs training tool code and environment configuration for getting reproducible results
+- Project specification contains: data, code, dependencies and configuration
+- Project can be contained in a regular folder or a `.git` repository
+- Provides API for executing projects locally (Linux, Mac) or remotely (AzureML, Databricks, Docker etc.)
+
+---
+class: mlflow, mlflow-example-project
+
+## Projects: Example definition
+
+.left-half[
+
+```
+project/
+```
+```
+- MLproject
+- conda.yaml
+- main.py
+- model.py
+- ...
+```
+
+]
+
+.right-half[
+
+```
+MLproject:
+```
+
+```yaml
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      training_data: path
+      lambda: {type: float, default: 0.1}
+    command: python main.py {training_data}
+             {lambda}
+```
+
+]
+
+---
+class: mlflow
+
+## TODO: Models
+
+---
+class: mlflow
+
+## Registry
+
+- Latest addition to MLflow
+- Stores model information:
+    - Which experiment and run created the model
+    - Model versioning
+    - Transitions between stages (e.g. from staging to production)
+    - Extra annotations
 
 ---
 
