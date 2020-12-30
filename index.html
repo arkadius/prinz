@@ -46,7 +46,7 @@
 
         /* Content-specific styles */
 
-        .mlflow ul, .mlflow code {
+        .mlflow p, .mlflow ul, .mlflow .remark-inline-code {
             font-size: 32px;
         }
 
@@ -56,8 +56,8 @@
 
         #mlflow-logo {
             display: block;
-            margin: 2em auto 3em;
-            height: 8em;
+            margin: 1em auto 2em;
+            height: 6em;
         }
 
         .mlflow-components ul {
@@ -386,7 +386,94 @@ entry_points:
 ---
 class: mlflow
 
-## TODO: Models
+## Models
+
+- MLflow Model standarises packaging machine learning models
+- Each model can be stored in multiple flavors (`pytorch`, TensorFlow model, R code etc.)
+- Models can include signatures 
+- It's easy to deploy models from MLflow
+
+---
+class: mlflow, mlflow-example-project
+
+## Models: Example definition
+
+- Calling `mlflow.sklearn.save_model(model, "my_model")` generates the following folder from a `scikit-learn` model:
+
+.left-half[
+
+```
+my_model/
+```
+```
+- MLmodel
+- model.pkl
+```
+
+]
+
+.right-half[
+
+```
+MLmodel:
+```
+
+```yaml
+time_created: 2020-12-20T17:28:53.35
+
+flavors:
+  sklearn:
+    sklearn_version: 0.19.1
+    pickled_model: model.pkl
+  python_function:
+    loader_module: mlflow.sklearn
+```
+
+]
+
+---
+class: mlflow
+
+## Models: Signatures
+
+- It's often required to know properties of the model, e.g.:
+  - what inputs does it expect?
+  - what are the outputs?
+- `MLModel` file can store model signature
+- When scoring, inputs are checked against the signature
+- API enables querying for model signatures
+
+---
+class: mlflow
+
+## Models: Example signature
+
+(JSON prettified from a single-line string)
+
+```yaml
+signature:
+  inputs: >
+    [
+      {"name": "sepal length (cm)", "type": "double"},
+      {"name": "sepal width (cm)", "type": "double"},
+      {"name": "petal length (cm)", "type": "double"},
+      {"name": "petal width (cm)", "type": "double"}
+    ]
+  outputs: >
+    [
+      {"type": "integer"}
+    ]
+```
+
+---
+class: mlflow
+
+## Models: Deployments
+
+- MLflow can deploy models:
+  - locally as REST endpoints
+  - as a Docker container with `pandas` and a REST endpoint
+  - to specialized ML environments like Microsoft Azure ML
 
 ---
 class: mlflow
