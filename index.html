@@ -140,12 +140,12 @@ class: center, middle
 - H20
 
     3.1 Introduction to H20
+    
+    3.2 H2O models formats
 
-    3.2 POJO vs MOJO
+    3.3 POJO vs MOJO
 
-    3.3 MOJO's graphical representation
-
-    3.4 Code examples
+    3.4 MOJO's graphical representation
 ]
 
 ---
@@ -492,7 +492,21 @@ class: mlflow
 ---
 
 ## Introduction to H20
+    
+H2O is primary product of H2O.ai company. It's a open source, in-memory, distributed,
+ML and predictive analytics platform allowing you to build and productionize ML models.
 
+H2O contains supervised and unsupervised models like GLM and K-Means clustering,
+and a simple to use web-UI called Flow.
+
+.centered-flex[
+    <img  id="h20ai-logo" src="img/h2o.png" alt="H2O.ai logo" title="H2O.ai logo" />
+]
+    
+---
+    
+## H2O models formats
+    
 H2O supports POJO and MOJO model formats.
 
 - POJO - Plain Old Java Object
@@ -501,7 +515,7 @@ H2O supports POJO and MOJO model formats.
 
 Both this formats allow to easily embed them into Java 
 environment. The only required dependency for compilation and runtime is `h2o-genmodel.jar`.
-
+    
 ---
 
 ## POJO vs MOJO
@@ -544,49 +558,6 @@ Example GBM model:
 .centered-flex[
 <img src="http://docs.h2o.ai/h2o/latest-stable/h2o-docs/_images/gbm_mojo_graph.png" style="width: 30em; margin: 0;">
 ]
-
----
-
-## Code example - MOJO
-
-```java
-MojoModel loadModel = MojoModel.load("GBM_model_R_1475248925871_74.zip");
-
-EasyPredictModelWrapper model = new EasyPredictModelWrapper(loadModel);
-
-RowData row = new RowData();
-row.put("AGE", "68");
-row.put("RACE", "2");
-row.put("DCAPS", "2");
-row.put("VOL", "0");
-row.put("GLEASON", "6");
-
-BinomialModelPrediction pred = model.predictBinomial(row);
-```
-
----
-
-## Code example - MOJO
-
-```java
-GenModel rawModel = (GenModel) Class.forName(modelClassName)
-                                    .newInstance();
-
-EasyPredictModelWrapper model = new EasyPredictModelWrapper(rawModel);
-
-RowData row = new RowData();
-row.put("Year", "1987");
-row.put("Month", "10");
-row.put("DayofMonth", "14");
-row.put("DayOfWeek", "3");
-row.put("CRSDepTime", "730");
-row.put("UniqueCarrier", "PS");
-row.put("Origin", "SAN");
-row.put("Dest", "SFO");
-
-BinomialModelPrediction pred = model.predictBinomial(row);
-```
-
 
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js">
