@@ -125,12 +125,9 @@ lazy val prinz_sample = (project in file("prinz_sample"))
     libraryDependencies ++= {
       Seq(
         "pl.touk.nussknacker" %% "nussknacker-process" % nussknackerV,
-        "pl.touk.nussknacker" %% "nussknacker-model-flink-util" % nussknackerV,
-        "pl.touk.nussknacker" %% "nussknacker-kafka-flink-util" % nussknackerV,
         "pl.touk.nussknacker" %% "nussknacker-ui" % nussknackerV,
-        "pl.touk.nussknacker" %% "nussknacker-flink-manager" % nussknackerV,
-        "pl.touk.nussknacker" %% "nussknacker-flink-api" % nussknackerV,
-        "pl.touk.nussknacker" %% "nussknacker-flink-util" % nussknackerV,
+        "pl.touk.nussknacker" %% "nussknacker-standalone-engine" % nussknackerV,
+        "pl.touk.nussknacker" %% "nussknacker-standalone-util" % nussknackerV
       )
     }
   )
